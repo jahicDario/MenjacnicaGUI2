@@ -5,18 +5,27 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import domen.Kurs;
 
 public class MenjacnicaTableModel extends AbstractTableModel {
 
-	private final String[] kolone = new String[] { "Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv" };
+	private final String[] kolone = new String[] { "Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni",
+			"Naziv" };
+	private List<Kurs> kursevi;
 	
-
+	public MenjacnicaTableModel(List<Kurs> kursevi) {
+		if (kursevi == null) {
+			this.kursevi = new LinkedList<>();
+		} else {
+			this.kursevi = kursevi;
+		}
+	}
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-	return false;
+		return false;
 	}
-	
+
 	@Override
 	public int getColumnCount() {
 		return kolone.length;
@@ -24,7 +33,7 @@ public class MenjacnicaTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return 0;
+		return kursevi.size();
 	}
 
 	@Override
@@ -34,7 +43,26 @@ public class MenjacnicaTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		Kurs k = kursevi.get(rowIndex);
+		switch (columnIndex) {
+		case 0:
+			return k.getSifra();
+		case 1:
+			return k.getSkraceniNaziv();
+		case 2:
+			return k.getProdajniKurs();
+		case 3:
+			return k.getSrednjiKurs();
+		case 4:
+			return k.getKupovniKurs();
+		case 5:
+			return k.getNaziv();
+		default:
+			return "NN";
+		}
+	}
+	public void dodajKursIOsvezi(Kurs k){
+		kursevi.add(k);
+		fireTableDataChanged();
 	}
 }
