@@ -13,6 +13,11 @@ public class MenjacnicaTableModel extends AbstractTableModel {
 
 
 	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	return false;
+	}
+	
+	@Override
 	public int getColumnCount() {
 		return kolone.length;
 	}

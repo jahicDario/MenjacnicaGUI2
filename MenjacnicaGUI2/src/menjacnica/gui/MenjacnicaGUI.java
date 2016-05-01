@@ -22,6 +22,10 @@ import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MenjacnicaGUI extends JFrame {
 
@@ -33,7 +37,6 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton btnIzvrsiIzmenu;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private JTextArea textArea;
 	private JMenuBar menuBar;
 	private JMenu mnFile;
 	private JMenu mnHelp;
@@ -41,6 +44,12 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem mntmOpen;
 	private JMenuItem mntmExit;
 	private JMenuItem mntmAbout;
+	private JScrollPane scrollPane_1;
+	private JTextArea textArea;
+	private JPopupMenu popupMenu;
+	private JMenuItem mntmDodajKurs;
+	private JMenuItem mntmIzbrisiKurs;
+	private JMenuItem mntmIzvrsiIzmenu;
 
 	/**
 	 * Launch the application.
@@ -90,7 +99,9 @@ public class MenjacnicaGUI extends JFrame {
 			southPanel = new JPanel();
 			southPanel.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			southPanel.setPreferredSize(new Dimension(10, 40));
-			southPanel.add(getTextArea());
+			southPanel.setLayout(new BorderLayout(0, 0));
+			southPanel.add(getScrollPane_1(), BorderLayout.CENTER);
+			southPanel.add(getTextArea(), BorderLayout.NORTH);
 		}
 		return southPanel;
 	}
@@ -115,6 +126,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
+			addPopup(scrollPane, getPopupMenu());
 			scrollPane.setViewportView(getTable());
 		}
 		return scrollPane;
@@ -126,13 +138,6 @@ public class MenjacnicaGUI extends JFrame {
 			table.setModel(mtm);
 		}
 		return table;
-	}
-	private JTextArea getTextArea() {
-		if (textArea == null) {
-			textArea = new JTextArea();
-			textArea.setPreferredSize(new Dimension(399, 20));
-		}
-		return textArea;
 	}
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
@@ -186,5 +191,61 @@ public class MenjacnicaGUI extends JFrame {
 			mntmAbout = new JMenuItem("About");
 		}
 		return mntmAbout;
+	}
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+		}
+		return scrollPane_1;
+	}
+	private JTextArea getTextArea() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+		}
+		return textArea;
+	}
+	private JPopupMenu getPopupMenu() {
+		if (popupMenu == null) {
+			popupMenu = new JPopupMenu();
+			popupMenu.add(getMntmDodajKurs());
+			popupMenu.add(getMntmIzbrisiKurs());
+			popupMenu.add(getMntmIzvrsiIzmenu());
+		}
+		return popupMenu;
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+	private JMenuItem getMntmDodajKurs() {
+		if (mntmDodajKurs == null) {
+			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+		}
+		return mntmDodajKurs;
+	}
+	private JMenuItem getMntmIzbrisiKurs() {
+		if (mntmIzbrisiKurs == null) {
+			mntmIzbrisiKurs = new JMenuItem("Izbrisi kurs");
+		}
+		return mntmIzbrisiKurs;
+	}
+	private JMenuItem getMntmIzvrsiIzmenu() {
+		if (mntmIzvrsiIzmenu == null) {
+			mntmIzvrsiIzmenu = new JMenuItem("Izvrsi izmenu");
+		}
+		return mntmIzvrsiIzmenu;
 	}
 }
