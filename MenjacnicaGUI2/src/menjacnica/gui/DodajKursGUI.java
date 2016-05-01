@@ -179,6 +179,7 @@ public class DodajKursGUI extends JFrame {
 					s = "Sifra: " + sifra + " Naziv: " + naziv + " Prodajni kurs: " + prodajniKurs + 
 				" Kupovni kurs: " + kupovniKurs + " Srednji kurs: " + srednjiKurs + " Skraceni naziv: " + skraceniNaziv + "\n";
 					GUIKontroler.ispisiUTextArea(s);
+					GUIKontroler.dodajKurs(sifra, skraceniNaziv, prodajniKurs, srednjiKurs, kupovniKurs, skraceniNaziv);
 				}
 			});
 			btnDodaj.setPreferredSize(new Dimension(100, 23));

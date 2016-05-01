@@ -91,7 +91,7 @@ public class GUIKontroler {
 			k.setNaziv(naziv);
 			
 			mtm.dodajKursIOsvezi(k);
-			
+			//TODO
 			
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(menjacnicaGui.getContentPane(), "Proveri formu: " + e1.getMessage(), "Greska",

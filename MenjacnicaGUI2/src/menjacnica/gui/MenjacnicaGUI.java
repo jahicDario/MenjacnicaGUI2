@@ -105,6 +105,14 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DodajKursGUI dkg = new DodajKursGUI();
+					dkg.setVisible(true);
+					dkg.setLocationRelativeTo(null);
+					
+				}
+			});
 			btnDodajKurs.setPreferredSize(new Dimension(95, 23));
 		}
 		return btnDodajKurs;
