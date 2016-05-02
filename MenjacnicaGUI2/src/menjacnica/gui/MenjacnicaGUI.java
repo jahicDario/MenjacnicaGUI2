@@ -138,7 +138,7 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return scrollPane;
 	}
-	private JTable getTable() {
+	public JTable getTable() {
 		if (table == null) {
 			table = new JTable();
 			MenjacnicaTableModel mtm = new MenjacnicaTableModel(null);
@@ -260,6 +260,13 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmDodajKurs() {
 		if (mntmDodajKurs == null) {
 			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					DodajKursGUI dkg = new DodajKursGUI();
+					dkg.setVisible(true);
+					dkg.setLocationRelativeTo(null);
+				}
+			});
 		}
 		return mntmDodajKurs;
 	}
@@ -275,4 +282,6 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return mntmIzvrsiIzmenu;
 	}
+
+
 }

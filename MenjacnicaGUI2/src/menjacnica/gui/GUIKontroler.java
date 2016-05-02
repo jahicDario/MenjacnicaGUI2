@@ -3,6 +3,7 @@ package menjacnica.gui;
 import java.awt.EventQueue;
 import java.io.File;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -15,8 +16,8 @@ import menjacnica.models.MenjacnicaTableModel;
 public class GUIKontroler {
 
 	private static MenjacnicaGUI menjacnicaGui;
-	private static String textUTextArea;
-	private static MenjacnicaTableModel mtm;
+	private static String textUTextArea = "";
+
 
 	/**
 	 * Launch the application.
@@ -89,8 +90,10 @@ public class GUIKontroler {
 			k.setSrednjiKurs(Integer.parseInt(srednji));
 			k.setKupovniKurs(Integer.parseInt(kupovni));
 			k.setNaziv(naziv);
-			
+		
+			MenjacnicaTableModel mtm = (MenjacnicaTableModel) menjacnicaGui.getTable().getModel();
 			mtm.dodajKursIOsvezi(k);
+			menjacnicaGui.getTable().setModel(mtm);
 			//TODO
 			
 		} catch (Exception e1) {
@@ -104,6 +107,7 @@ public class GUIKontroler {
 		JOptionPane.showMessageDialog(menjacnicaGui, "Aplikaciju je napravio Dario Jahic, student Fakulteta organizacionih nauka.");
 		
 	}
+
 
 
 	
