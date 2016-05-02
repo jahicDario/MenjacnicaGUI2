@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class IzvrsiZamenuGUI extends JFrame {
 
@@ -35,21 +37,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private JButton btnOdustani;
 	private JButton btnIzvrsiZamenu;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IzvrsiZamenuGUI frame = new IzvrsiZamenuGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -171,6 +159,11 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private JSlider getSlider() {
 		if (slider == null) {
 			slider = new JSlider();
+			slider.addChangeListener(new ChangeListener() {
+				public void stateChanged(ChangeEvent arg0) {
+					txtIznos.setText(slider.getValue() + "");
+				}
+			});
 			slider.addAncestorListener(new AncestorListener() {
 				public void ancestorAdded(AncestorEvent event) {
 			
