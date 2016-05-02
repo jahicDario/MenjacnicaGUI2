@@ -108,6 +108,14 @@ public class GUIKontroler {
 		
 	}
 
+	public static void izbrisiKurs(Kurs k) {
+		MenjacnicaTableModel mtm = (MenjacnicaTableModel) menjacnicaGui.getTable().getModel();
+		mtm.obrisiKursIOsvezi(k);
+		menjacnicaGui.getTable().setModel(mtm);
+	}
+
+
+
 
 
 	

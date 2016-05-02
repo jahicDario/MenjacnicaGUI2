@@ -44,6 +44,18 @@ public class Kurs {
 	public void setSkraceniNaziv(String skraceniNaziv) {
 		this.skraceniNaziv = skraceniNaziv;
 	}
-	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Kurs){
+			Kurs k = (Kurs) obj;
+			if(k.getNaziv().equals(getNaziv())){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		return false;
+	}
 
 }

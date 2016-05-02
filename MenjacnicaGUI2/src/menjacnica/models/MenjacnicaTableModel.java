@@ -3,9 +3,11 @@ package menjacnica.models;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 import domen.Kurs;
+import menjacnica.gui.MenjacnicaGUI;
 
 public class MenjacnicaTableModel extends AbstractTableModel {
 
@@ -63,6 +65,19 @@ public class MenjacnicaTableModel extends AbstractTableModel {
 	}
 	public void dodajKursIOsvezi(Kurs k){
 		kursevi.add(k);
+		fireTableDataChanged();
+	}
+
+	public Kurs getKursByIndex(int index) {
+		return kursevi.get(index);
+	}
+
+	public void obrisiKursIOsvezi(Kurs k) {
+		if(kursevi.contains(k)){
+			kursevi.remove(k);
+		}else{
+			System.out.println("greska prilikom brisanja");
+		}
 		fireTableDataChanged();
 	}
 }

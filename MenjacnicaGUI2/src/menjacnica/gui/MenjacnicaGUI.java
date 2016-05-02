@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 
+
+import domen.Kurs;
 import menjacnica.models.MenjacnicaTableModel;
 
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
@@ -120,6 +123,25 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzbrisiKurs() {
 		if (btnIzbrisiKurs == null) {
 			btnIzbrisiKurs = new JButton("Izbrisi kurs");
+			btnIzbrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int index = table.getSelectedRow();
+					if (index == -1) {
+						JOptionPane.showMessageDialog(contentPane, "Izaberite red koji zelite da obrisete.");
+					} else {
+						int opcija = JOptionPane.showConfirmDialog(null,
+								"Da li ste sigurni da zelite da izbrisete izabrani kurs?", "Poruka",
+								JOptionPane.YES_NO_OPTION);
+						if (opcija == JOptionPane.YES_OPTION) {
+							MenjacnicaTableModel model = (MenjacnicaTableModel) table.getModel();
+							Kurs k = model.getKursByIndex(index);
+							GUIKontroler.izbrisiKurs(k);
+							JOptionPane.showMessageDialog(contentPane, "Uspesno ste obrisali kurs");
+							GUIKontroler.ispisiUTextArea("Izbrisan je red sa indexom: " + index + "\n");
+						}
+					}
+				}
+			});
 			btnIzbrisiKurs.setPreferredSize(new Dimension(95, 23));
 		}
 		return btnIzbrisiKurs;
